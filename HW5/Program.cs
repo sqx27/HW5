@@ -15,19 +15,25 @@ namespace myapp
 
             Underlying u = new Underlying();
             u.Exchange = e;
-            u.Symbol = "GE";
-            u.Price = 102;
+            Console.WriteLine("Enter the ticker of selected stock: ");
+            u.Symbol = Convert.ToString(Console.ReadLine());
+            Console.WriteLine("Enter the price");
+            u.Price = Convert.ToDouble(Console.ReadLine());
 
             EuropeanOption euro = new EuropeanOption();
-            euro.IsCall = true;
-            euro.Strike = 100;
+            Console.WriteLine("Is this a Call? Please enter true for call, false for put. ");
+            euro.IsCall = Convert.ToBoolean(Console.ReadLine());
+            Console.WriteLine("Set the strike price ");
+            euro.Strike = Convert.ToDouble(Console.ReadLine());
             euro.ExpirationDate = new DateTime(2022,06,10);
             euro.Undelying = u;
+
             Volatility vol = new Volatility();
-            vol.vol = 0.5;
-            
+            Console.WriteLine("Set volatility rate");
+            vol.vol = Convert.ToDouble(Console.ReadLine());  
             var g = euro.GetPriceAndGreeks(252, 1000, vol);
-            //Console.WriteLine("Price of the option is {0}", g.Price());
+
+            Console.WriteLine("Price of the option is {0}", g.Price);
         }
     }
     
